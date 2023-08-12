@@ -1,0 +1,30 @@
+{% extends 'Layout.html' %}
+{%block content%}
+<div class="text-center mt-5">
+<form class="form-signin" style="max-width:25rem;margin:auto" method="POST"action="">
+    {{ form.hidden_tag() }}
+    <img class="mb-4 rounded" src="static/Proj_img/Logo.png" alt="" width="100" height="100">
+    <h1 class="h3 mb-3 font-weight-normal">Reset Password</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    {{ form.email.label() }}
+    {% if form.email.errors %}
+    {{ form.email(class="form-control  is-invalid ") }}
+    <div class="invalid-feedback">
+        {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    {{ form.email(class="form-control  ") }}
+{% endif %}
+    
+  <div class="form-group mt-2">
+ {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
+  </div>
+                
+  </form>
+
+  
+<p class="mt-5 mb-3 text-muted">&copy; 2022-2023</p>
+</div>
+  {%endblock content%}

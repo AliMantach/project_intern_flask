@@ -1,0 +1,37 @@
+{% extends 'Layout.html' %}
+{%block content%}
+
+
+
+  <div class="card-deck text-center  " style="margin:auto;">
+    {% for post in posts.items %}
+    <div class="col-md-3 ml-5">
+        <a href="{{ url_for('posts.post', post_id=post.id) }}">
+      <img class="card-img-top " src="{{url_for('static', filename='Proj_img/' + post.image_file)}}" alt="Card image cap" style="max-width=239px;max-height:200px;">
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+      </a>
+        <p class="card-text">{{post.content[:70]}}...</p>
+        <p class="card-text"><small class="text-muted">{{post.author.username}}.{{ post.date_posted.strftime('%Y-%m-%d') }}</small></p>
+      </div>
+    </div>
+    {% endfor %}
+ 
+  
+  </div>
+<div>
+  {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+    {% if posts.page == page_num %}
+      <a class="btn btn-info mb-4 " href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+      <a class="btn btn-outline-info mb-4 " href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+ 
+  {% endif %}
+{% endfor %}
+</div>
+
+
+{%endblock content%}
